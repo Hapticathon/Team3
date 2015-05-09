@@ -1,5 +1,6 @@
 package com.mewa.langhub.activities;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -9,14 +10,16 @@ import android.view.MenuItem;
 
 import com.mewa.langhub.Data;
 import com.mewa.langhub.R;
+import com.mewa.langhub.interfaces.WordClickHandler;
+import com.mewa.langhub.models.Word;
+
 import java.util.ArrayList;
 
 
 
-public class WordListActivity extends AppCompatActivity {
+public class WordListActivity extends AppCompatActivity implements WordClickHandler {
 
     public static SoundPool soundPool;
-    public ArrayList<Integer> soundId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +61,12 @@ public class WordListActivity extends AppCompatActivity {
         Data.word9.setSoundId(soundPool.load(this, R.raw.family, 1));
         Data.word10.setSoundId(soundPool.load(this, R.raw.spring, 1));
         Data.word11.setSoundId(soundPool.load(this, R.raw.book, 1));
+    }
 
-
+    @Override
+    public void onClick(Word word) {
+        Intent intent = new Intent(getBaseContext(),WordActivity.class);
+        intent.putExtra("word",word);
+        startActivity(intent);
     }
 }

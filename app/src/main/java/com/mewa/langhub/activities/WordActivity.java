@@ -1,6 +1,7 @@
 package com.mewa.langhub.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,7 +35,10 @@ public class WordActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word);
         final ImageView imageView = (ImageView)findViewById(R.id.image);
-        final Word dataWord = Data.word1;
+        final Word dataWord;
+        Intent intent = getIntent();
+        Bundle bundle =  intent.getExtras();
+        dataWord = bundle.getParcelable("word");
         pronunciation = (TextView) findViewById(R.id.pronunciation);
         word = (TextView) findViewById(R.id.word);
         translation = (TextView) findViewById(R.id.translation);
