@@ -17,8 +17,8 @@ import nxr.tpad.lib.views.FrictionMapView;
  */
 public class MainActivityFragment extends Fragment {
 
-    private FrictionMapView mFrictionMapView;
-    private TPad mTpad;
+    //private FrictionMapView mFrictionMapView;
+   // private TPad mTpad;
     private RecyclerView mRecyclerView;
 
     public MainActivityFragment() {
@@ -29,10 +29,10 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        mTpad = new TPadImpl(getActivity());
+        //mTpad = new TPadImpl(getActivity());
 
-        mFrictionMapView = (FrictionMapView)view.findViewById(R.id.friction_map_view);
-        mFrictionMapView.setTpad(mTpad);
+       // mFrictionMapView = (FrictionMapView)view.findViewById(R.id.friction_map_view);
+       // mFrictionMapView.setTpad(mTpad);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
