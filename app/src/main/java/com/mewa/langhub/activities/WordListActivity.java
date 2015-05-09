@@ -1,20 +1,27 @@
 package com.mewa.langhub.activities;
 
-import android.support.v7.app.ActionBarActivity;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mewa.langhub.Data;
 import com.mewa.langhub.R;
+import java.util.ArrayList;
+
 
 
 public class WordListActivity extends AppCompatActivity {
 
+    public static SoundPool soundPool;
+    public ArrayList<Integer> soundId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadMusic();
     }
 
 
@@ -31,12 +38,27 @@ public class WordListActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void loadMusic(){
+        soundPool =  new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+        Data.word1.setSoundId(soundPool.load(this, R.raw.health, 1));
+        Data.word2.setSoundId(soundPool.load(this, R.raw.shoe, 1));
+        Data.word3.setSoundId(soundPool.load(this, R.raw.paper, 1));
+        Data.word4.setSoundId(soundPool.load(this, R.raw.student, 1));
+        Data.word5.setSoundId(soundPool.load(this, R.raw.hospital, 1));
+        Data.word6.setSoundId(soundPool.load(this, R.raw.bird, 1));
+        Data.word7.setSoundId(soundPool.load(this, R.raw.history, 1));
+        Data.word8.setSoundId(soundPool.load(this, R.raw.work, 1));
+        Data.word9.setSoundId(soundPool.load(this, R.raw.family, 1));
+        Data.word10.setSoundId(soundPool.load(this, R.raw.spring, 1));
+        Data.word11.setSoundId(soundPool.load(this, R.raw.book, 1));
+
+
     }
 }

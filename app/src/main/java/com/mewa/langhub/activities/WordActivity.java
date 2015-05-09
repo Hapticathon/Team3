@@ -15,8 +15,10 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mewa.langhub.Data;
 import com.mewa.langhub.models.Point;
 import com.mewa.langhub.R;
+import com.mewa.langhub.models.Word;
 
 import java.util.ArrayList;
 
@@ -26,34 +28,30 @@ public class WordActivity extends Activity {
     TextView pronunciation;
     TextView word;
     TextView translation;
-    SoundPool soundPool;
-    int soundID;
-    float[] coordinates = {6,5,5,7,8,9,10,11,11,10,8,7,6,4,3,3,4,5,5,7,8,13,16,18,17,16,16,14};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word);
         final ImageView imageView = (ImageView)findViewById(R.id.image);
+        final Word dataWord = Data.word1;
         pronunciation = (TextView) findViewById(R.id.pronunciation);
         word = (TextView) findViewById(R.id.word);
         translation = (TextView) findViewById(R.id.translation);
-        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-        soundID = soundPool.load(this, R.raw.beat, 1);
-        pronunciation.setText("pɹəˌnʌnsiˈeɪʃən");
-        word.setText("pronunciation");
-        translation.setText("wymowa");
+        pronunciation.setText("");
+        word.setText(dataWord.getWord());
+        translation.setText(dataWord.getTranslation());
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                soundPool.play(soundID,1.0f,1.0f,1,0,1.0f);
+                WordListActivity.soundPool.play(dataWord.getSoundId(),1.0f,1.0f,1,0,1.0f);
             }
         });
 
         word.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                soundPool.play(soundID,1.0f,1.0f,1,0,1.0f);
+                WordListActivity.soundPool.play(dataWord.getSoundId(),1.0f,1.0f,1,0,1.0f);
                 return false;
             }
         });
@@ -65,7 +63,7 @@ public class WordActivity extends Activity {
                 imageView.getViewTreeObserver().removeOnPreDrawListener(this);
                 finalHeight = imageView.getMeasuredHeight();
                 finalWidth = imageView.getMeasuredWidth();
-                Bitmap bitmap =createBitmapWithPath(drawingImageView,coordinates);
+                Bitmap bitmap =createBitmapWithPath(drawingImageView,dataWord.getCoordinates());
                 imageView.setImageBitmap(bitmap);
                 return true;
             }
