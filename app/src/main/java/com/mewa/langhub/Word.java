@@ -1,5 +1,6 @@
 package com.mewa.langhub;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ public class Word {
     String word;
     String translation;
     String pronunciation;
-    ArrayList<Integer> coordinates;
+    float []coordinates;
 
     public String getWord() {
         return word;
@@ -35,18 +36,18 @@ public class Word {
         this.pronunciation = pronunciation;
     }
 
-    public ArrayList<Integer> getCoordinates() {
+    public float[] getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(ArrayList<Integer> coordinates) {
+    public void setCoordinates(float[] coordinates) {
         this.coordinates = coordinates;
     }
 
-    public Word(String word,  String pronunciation, ArrayList<Integer> coordinates, String translation) {
-        this.coordinates = coordinates;
-        this.pronunciation = pronunciation;
+    public Word(String word, String translation, String pronunciation, float[] coordinates) {
         this.word = word;
         this.translation = translation;
+        this.pronunciation = pronunciation;
+        this.coordinates = coordinates;
     }
 }

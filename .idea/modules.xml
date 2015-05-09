@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LangHub.iml" filepath="$PROJECT_DIR$/LangHub.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hapticathon-viet.iml" filepath="$PROJECT_DIR$/hapticathon-viet.iml" />
       <module fileurl="file://$PROJECT_DIR$/libtpad/libtpad.iml" filepath="$PROJECT_DIR$/libtpad/libtpad.iml" />
     </modules>
   </component>
 </project>
+
