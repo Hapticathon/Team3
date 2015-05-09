@@ -1,7 +1,8 @@
 package com.mewa.langhub;
 
+import com.mewa.langhub.models.Word;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Maciej on 2015-05-09.

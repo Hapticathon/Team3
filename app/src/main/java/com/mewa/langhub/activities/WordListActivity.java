@@ -1,4 +1,4 @@
-package com.mewa.langhub;
+package com.mewa.langhub.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mewa.langhub.R;
 
-public class MainActivity extends AppCompatActivity {
+
+public class WordListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.mewa.langhub;
+package com.mewa.langhub.activities;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mewa.langhub.models.Point;
+import com.mewa.langhub.R;
 
 import java.util.ArrayList;
 

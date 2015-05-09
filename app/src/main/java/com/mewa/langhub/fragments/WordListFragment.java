@@ -1,4 +1,4 @@
-package com.mewa.langhub;
+package com.mewa.langhub.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,22 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import nxr.tpad.lib.TPad;
-import nxr.tpad.lib.TPadImpl;
-import nxr.tpad.lib.views.FrictionMapView;
+import com.mewa.langhub.R;
+import com.mewa.langhub.adapters.WordAdapter;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class WordListFragment extends Fragment {
 
     //private FrictionMapView mFrictionMapView;
     // private TPad mTpad;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
-    public MainActivityFragment() {
+    public WordListFragment() {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.mewa.langhub;
+package com.mewa.langhub.models;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
