@@ -7,10 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by mewa on 5/9/15.
  */
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
+    private List<Word> mWords = Collections.synchronizedList(new ArrayList<Word>());
+
+    public WordAdapter() {
+        
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder vh;
@@ -21,12 +31,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        holder.wordTextView;
+        holder.wordTextView.setText(mWords.get(position).getWord());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mWords.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

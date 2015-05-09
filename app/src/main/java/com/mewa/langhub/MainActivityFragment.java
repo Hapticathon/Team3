@@ -2,6 +2,7 @@ package com.mewa.langhub;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,9 @@ import nxr.tpad.lib.views.FrictionMapView;
 public class MainActivityFragment extends Fragment {
 
     //private FrictionMapView mFrictionMapView;
-   // private TPad mTpad;
+    // private TPad mTpad;
     private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
 
     public MainActivityFragment() {
     }
@@ -31,11 +33,13 @@ public class MainActivityFragment extends Fragment {
 
         //mTpad = new TPadImpl(getActivity());
 
-       // mFrictionMapView = (FrictionMapView)view.findViewById(R.id.friction_map_view);
-       // mFrictionMapView.setTpad(mTpad);
+        // mFrictionMapView = (FrictionMapView)view.findViewById(R.id.friction_map_view);
+        // mFrictionMapView.setTpad(mTpad);
 
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(new WordAdapter());
 
         return view;
