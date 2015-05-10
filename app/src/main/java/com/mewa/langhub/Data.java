@@ -19,7 +19,7 @@ public class Data {
     static public Word word4 = new Word("sinh viên", "student", "", lol4, R.raw.student);
     static float[] lol5 = {19.0f, 1.0f, 19.0f, 1.0f};
     static public Word word5 = new Word("bệnh viện", "hospital", "", lol5, R.raw.hospital);
-    static float[] lol6 = {1.0f, 4.0f, 1.0f, 4.0f};
+    static float[] lol6 = {8.0f, 12.0f, 8.0f, 12.0f};
     static public Word word6 = new Word("con chim", "bird", "", lol6, R.raw.bird);
     static float[] lol7 = {13.0f, 19.0f, 1.0f, 3.0f, 4.0f, 3.0f, 2.0f, 2.0f, 5.0f, 8.0f, 12.0f, 14.0f, 12.0f, 14.0f};
     static public Word word7 = new Word("lịch sử", "history", "", lol7, R.raw.history);

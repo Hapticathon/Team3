@@ -39,13 +39,14 @@ public class WordActivity extends Activity {
     private TPad mTpad;
     private FrictionMapView mFrictionMapView;
     boolean play = false;
+    Word dataWord;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word);
         final ImageView imageView = (ImageView) findViewById(R.id.image);
-        final Word dataWord;
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         dataWord = bundle.getParcelable("word");
@@ -134,7 +135,7 @@ public class WordActivity extends Activity {
                 }
                 Bitmap bmp = Bitmap.createBitmap(colors, finalWidth, finalHeight, Bitmap.Config.ARGB_8888);
                 mFrictionMapView.setDataBitmap(bmp);
-                mFrictionMapView.setDisplayBitmap(Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888));
+                mFrictionMapView.setAlpha(0.0f);
                 imageView.setImageBitmap(createBitmapWithPath(imageView, dataWord.getCoordinates()));
                 return true;
             }
@@ -144,7 +145,7 @@ public class WordActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        mediaPlayer.start();
     }
 
     private Bitmap createBitmapWithPath(final ImageView imageView, float[] coordinates) {
@@ -215,7 +216,12 @@ public class WordActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        mediaPlayer.stop();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         mediaPlayer.release();
     }
 }
