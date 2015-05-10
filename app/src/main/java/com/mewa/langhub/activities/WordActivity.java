@@ -3,12 +3,15 @@ package com.mewa.langhub.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -21,6 +24,10 @@ import com.mewa.langhub.models.Word;
 
 import java.util.ArrayList;
 
+import nxr.tpad.lib.TPad;
+import nxr.tpad.lib.TPadImpl;
+import nxr.tpad.lib.views.FrictionMapView;
+
 public class WordActivity extends Activity {
     private static final String TAG = "WordActivity";
     ImageView drawingImageView;
@@ -30,6 +37,8 @@ public class WordActivity extends Activity {
     TextView translation;
     public MediaPlayer mediaPlayer;
     private int loadedSoundId = -1;
+    private TPad mTpad;
+    private FrictionMapView mFrictionMapView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,13 @@ public class WordActivity extends Activity {
         pronunciation.setText("");
         word.setText(dataWord.getWord());
         translation.setText(dataWord.getTranslation());
+
+        mFrictionMapView = (FrictionMapView) findViewById(R.id.friction_map_view);
+        if (Build.VERSION.SDK_INT <= 21 && mTpad == null) {
+            mTpad = new TPadImpl(this);
+            mFrictionMapView.setTpad(mTpad);
+        }
+
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -67,7 +83,11 @@ public class WordActivity extends Activity {
         word.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                mediaPlayer.start();
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mediaPlayer.start();
+                        break;
+                }
                 return false;
             }
         });
@@ -81,6 +101,18 @@ public class WordActivity extends Activity {
                 finalWidth = imageView.getMeasuredWidth();
                 Bitmap bitmap = createBitmapWithPath(drawingImageView, dataWord.getCoordinates());
                 imageView.setImageBitmap(bitmap);
+                int colors[] = new int[finalWidth * finalHeight];
+                for (int i = 0; i < dataWord.getCoordinates().length; ++i) {
+                    Log.d(TAG, "coord " + i + ": " + dataWord.getCoordinates()[i]);
+                    int dx = finalWidth / (dataWord.getCoordinates().length - 1);
+                    for (int j = 0; j < finalWidth; j += dx) {
+                        for (int k = j; k < j + dx; ++k) {
+                            colors[k] = 0xFF000000 | (int) (0xFFFFFF * (dataWord.getCoordinates()[i]));
+                        }
+                    }
+                }
+                Bitmap bmp = Bitmap.createBitmap(colors, finalWidth, finalHeight, Bitmap.Config.ARGB_8888);
+                imageView.setImageBitmap(bmp);
                 return true;
             }
         });

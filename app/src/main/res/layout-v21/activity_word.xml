@@ -52,10 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <nxr.tpad.lib.views.FrictionMapView
-            android:id="@+id/friction_map_view"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
 
         <ImageView
             android:id="@+id/image"
