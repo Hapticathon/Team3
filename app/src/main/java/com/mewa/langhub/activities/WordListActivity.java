@@ -49,7 +49,7 @@ public class WordListActivity extends AppCompatActivity implements WordClickHand
         return super.onOptionsItemSelected(item);
     }
     private void loadMusic(){
-        soundPool =  new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+        soundPool =  new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         Data.word1.setSoundId(soundPool.load(this, R.raw.health, 1));
         Data.word2.setSoundId(soundPool.load(this, R.raw.shoe, 1));
         Data.word3.setSoundId(soundPool.load(this, R.raw.paper, 1));

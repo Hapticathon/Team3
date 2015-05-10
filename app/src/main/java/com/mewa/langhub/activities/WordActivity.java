@@ -96,7 +96,7 @@ public class WordActivity extends Activity {
 
     private Path createPath(float[] coordinates){
         ArrayList<Point> points = new ArrayList<>();
-        int x= finalWidth/coordinates.length;
+        int x= finalWidth/(coordinates.length-1);
         int y = finalHeight/20;
         for(int i=0;i<coordinates.length;i++) {
             Point point = new Point();
