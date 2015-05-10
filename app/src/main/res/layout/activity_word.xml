@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
@@ -29,10 +28,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:paddingBottom="30dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:typeface="monospace" />

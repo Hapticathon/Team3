@@ -125,7 +125,7 @@ public class WordActivity extends Activity {
                     int frequency=(Math.abs(((int)dataWord.getCoordinates()[i])-20))/5+2;
                     for (int j = i * dx; j < (i + 1) * dx; j++) {
                         for (int k = 0; k < finalHeight - 1; k++) {
-                            if(j%frequency<1)
+                            if(j%frequency<1 && dataWord.getCoordinates()[i]>10)
                                 colors[j+(k*finalWidth)]=black;
                             else
                                 colors[j+(k*finalWidth)]=white;
