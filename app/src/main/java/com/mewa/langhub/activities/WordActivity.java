@@ -122,20 +122,22 @@ public class WordActivity extends Activity {
                 for (int i = 0; i < dataWord.getCoordinates().length; i++) {
                     Log.d(TAG, "coord " + i + ": " + dataWord.getCoordinates()[i]);
                     int dx = finalWidth / (dataWord.getCoordinates().length - 1);
-                    int frequency=(Math.abs(((int)dataWord.getCoordinates()[i])-20))/5+2;
+                    int frequency = (Math.abs(((int) dataWord.getCoordinates()[i]) - 20)) / 5 + 2;
                     for (int j = i * dx; j < (i + 1) * dx; j++) {
                         for (int k = 0; k < finalHeight - 1; k++) {
-                            if(j%frequency<1 && dataWord.getCoordinates()[i]>10)
-                                colors[j+(k*finalWidth)]=black;
+                            if (j % frequency < 1 && dataWord.getCoordinates()[i] > 10)
+                                colors[j + (k * finalWidth)] = black;
                             else
-                                colors[j+(k*finalWidth)]=white;
+                                colors[j + (k * finalWidth)] = white;
 
                         }
                     }
                 }
                 Bitmap bmp = Bitmap.createBitmap(colors, finalWidth, finalHeight, Bitmap.Config.ARGB_8888);
-                mFrictionMapView.setDataBitmap(bmp);
-                mFrictionMapView.setAlpha(0.0f);
+                if (mFrictionMapView != null) {
+                    mFrictionMapView.setDataBitmap(bmp);
+                    mFrictionMapView.setAlpha(0.0f);
+                }
                 imageView.setImageBitmap(createBitmapWithPath(imageView, dataWord.getCoordinates()));
                 return true;
             }

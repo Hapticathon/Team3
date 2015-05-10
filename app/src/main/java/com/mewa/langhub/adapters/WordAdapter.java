@@ -14,6 +14,7 @@ import com.mewa.langhub.models.Word;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -27,6 +28,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
 
     public WordAdapter() {
         mWords.addAll(Arrays.asList(Data.word1, Data.word2, Data.word3, Data.word4, Data.word5, Data.word6, Data.word7, Data.word8, Data.word9, Data.word10));
+        Collections.sort(mWords, new Comparator<Word>() {
+            @Override
+            public int compare(Word lhs, Word rhs) {
+                return lhs.getWord().compareTo(rhs.getWord());
+            }
+        });
     }
 
     @Override
@@ -50,14 +57,14 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         holder.wordTextView.setText(mWords.get(position).getWord());
         holder.translationTextView.setText(mWords.get(position).getTranslation());
         if (position == 0) {
-            ((ViewGroup.MarginLayoutParams)holder.root.getLayoutParams()).topMargin = 0;
+            ((ViewGroup.MarginLayoutParams) holder.root.getLayoutParams()).topMargin = 0;
         } else {
-            ((ViewGroup.MarginLayoutParams)holder.root.getLayoutParams()).topMargin = holder.root.getResources().getDimensionPixelOffset(R.dimen.divider_height);
+            ((ViewGroup.MarginLayoutParams) holder.root.getLayoutParams()).topMargin = holder.root.getResources().getDimensionPixelOffset(R.dimen.divider_height);
         }
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((WordClickHandler)holder.root.getContext()).onClick(mWords.get(position));
+                ((WordClickHandler) holder.root.getContext()).onClick(mWords.get(position));
             }
         });
     }
