@@ -58,11 +58,12 @@ public class Word implements Parcelable{
         this.coordinates = coordinates;
     }
 
-    public Word(String word, String translation, String pronunciation, float[] coordinates) {
+    public Word(String word, String translation, String pronunciation, float[] coordinates, int soundResId) {
         this.word = word;
         this.translation = translation;
         this.pronunciation = pronunciation;
         this.coordinates = coordinates;
+        this.soundId = soundResId;
     }
 
     @Override
