@@ -3,7 +3,6 @@ package com.mewa.langhub.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,8 +17,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mewa.langhub.models.Point;
 import com.mewa.langhub.R;
+import com.mewa.langhub.models.Point;
 import com.mewa.langhub.models.Word;
 
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ public class WordActivity extends Activity {
     private int loadedSoundId = -1;
     private TPad mTpad;
     private FrictionMapView mFrictionMapView;
+    boolean play = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,16 @@ public class WordActivity extends Activity {
             mFrictionMapView.setTpad(mTpad);
         }
 
+
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        mediaPlayer.start();
+                        if (!play) {
+                            mediaPlayer.start();
+                            play = true;
+                        }
                         break;
                 }
                 return false;
@@ -85,10 +89,20 @@ public class WordActivity extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        mediaPlayer.start();
+                        if (!play) {
+                            mediaPlayer.start();
+                            play = true;
+                        }
                         break;
                 }
                 return false;
+            }
+        });
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                play = false;
             }
         });
 
@@ -101,18 +115,27 @@ public class WordActivity extends Activity {
                 finalWidth = imageView.getMeasuredWidth();
                 Bitmap bitmap = createBitmapWithPath(drawingImageView, dataWord.getCoordinates());
                 imageView.setImageBitmap(bitmap);
+                int black = 0xFF000000;
+                int white = 0xFFFFFFFF;
                 int colors[] = new int[finalWidth * finalHeight];
-                for (int i = 0; i < dataWord.getCoordinates().length; ++i) {
+                for (int i = 0; i < dataWord.getCoordinates().length; i++) {
                     Log.d(TAG, "coord " + i + ": " + dataWord.getCoordinates()[i]);
                     int dx = finalWidth / (dataWord.getCoordinates().length - 1);
-                    for (int j = 0; j < finalWidth; j += dx) {
-                        for (int k = j; k < j + dx; ++k) {
-                            colors[k] = 0xFF000000 | (int) (0xFFFFFF * (dataWord.getCoordinates()[i]));
+                    int frequency=(Math.abs(((int)dataWord.getCoordinates()[i])-20))/5+2;
+                    for (int j = i * dx; j < (i + 1) * dx; j++) {
+                        for (int k = 0; k < finalHeight - 1; k++) {
+                            if(j%frequency<1)
+                                colors[j+(k*finalWidth)]=black;
+                            else
+                                colors[j+(k*finalWidth)]=white;
+
                         }
                     }
                 }
                 Bitmap bmp = Bitmap.createBitmap(colors, finalWidth, finalHeight, Bitmap.Config.ARGB_8888);
-                imageView.setImageBitmap(bmp);
+                mFrictionMapView.setDataBitmap(bmp);
+                mFrictionMapView.setDisplayBitmap(Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888));
+                imageView.setImageBitmap(createBitmapWithPath(imageView, dataWord.getCoordinates()));
                 return true;
             }
         });
